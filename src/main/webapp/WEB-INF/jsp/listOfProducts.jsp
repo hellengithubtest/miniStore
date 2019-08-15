@@ -12,6 +12,7 @@
 <c:forEach items="${list}" var="item">
               <tr>
                        <td><a href="/product">${item.getProductName()}</a></td><br>
+                       <c:set var="product" scope="session" value="${item.getProductName()}" />
                 </tr>
             </c:forEach>
 </body>

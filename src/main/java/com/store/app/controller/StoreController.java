@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -25,8 +26,9 @@ public class StoreController {
         return new ModelAndView("listOfProducts", modelMap);
     }
 
-    @RequestMapping(value = "/product", method = RequestMethod.POST)
-    public String productInformation(ModelMap modelMap) {
+    @RequestMapping(value = "/product", method = RequestMethod.GET)
+    public String productInformation(HttpServletRequest request) {
+        System.out.println(request.getParameter("product"));
         return "productInformation";
     }
 
