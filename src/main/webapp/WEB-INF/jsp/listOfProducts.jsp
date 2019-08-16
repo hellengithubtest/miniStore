@@ -11,8 +11,7 @@
 <h3>List of items:</h3>
 <c:forEach items="${list}" var="item">
               <tr>
-                       <td><a href="/product">${item.getProductName()}</a></td><br>
-                       <c:set var="product" scope="session" value="${item.getProductName()}" />
+                       <td><a href="/product/${item.productId}">${item.productName}</a></td><br>
                 </tr>
             </c:forEach>
 </body>

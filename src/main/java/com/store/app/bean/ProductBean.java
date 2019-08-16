@@ -3,14 +3,14 @@ package com.store.app.bean;
 
 
 public class ProductBean {
+    private int productId;
     private String productName;
     private int productCost;
-    private String productDescription;
 
-    public ProductBean(String productName, int productCost, String productDescription) {
+    public ProductBean(int productId, String productName, int productCost) {
+        this.productId = productId;
         this.productName = productName;
         this.productCost = productCost;
-        this.productDescription = productDescription;
     }
 
     public void setProductName(String productName) {
@@ -21,8 +21,8 @@ public class ProductBean {
         this.productCost = productCost;
     }
 
-    public void setProductDescription(String productDescription) {
-        this.productDescription = productDescription;
+    public void setProductId(int productId) {
+        this.productId = productId;
     }
 
     public String getProductName() {
@@ -33,7 +33,7 @@ public class ProductBean {
         return productCost;
     }
 
-    public String getProductDescription() {
-        return productDescription;
+    public int getProductId() {
+        return productId;
     }
 }

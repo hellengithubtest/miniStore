@@ -12,13 +12,22 @@ public class StoreService {
 
     public StoreService() {
         list = new ArrayList<ProductBean>();
-        list.add(new ProductBean("apple", 2, "green"));
-        list.add(new ProductBean("banana", 3, "yellow"));
-        list.add(new ProductBean("orange", 4, "orange)"));
-        list.add(new ProductBean("apple", 1, "red"));
+        list.add(new ProductBean(1,"apple",  10));
+        list.add(new ProductBean(2, "banana", 10));
+        list.add(new ProductBean(3, "orange", 15));
+        list.add(new ProductBean(4, "strawberry", 20));
     }
 
     public List getList() {
         return this.list;
+    }
+
+    public ProductBean findId(int id) {
+        for (ProductBean productBean : list) {
+            if(productBean.getProductId() == id) {
+                return productBean;
+            }
+        }
+        return null;
     }
 }
