@@ -30,8 +30,12 @@ public class StoreController {
 
     @RequestMapping(value = "/product/{id}", method = RequestMethod.GET)
     public String productInformation(@PathVariable(value = "id") int id, Model model) {
-        model.addAttribute("product", listOfProducts.findId(id));
-        return "productInformation";
+        try {
+            model.addAttribute("product", listOfProducts.findId(id));
+            return "productInformation";
+        } catch (RuntimeException e) {
+            return "redirect:/";
+        }
     }
 
 }

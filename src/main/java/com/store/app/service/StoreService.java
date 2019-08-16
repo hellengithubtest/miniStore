@@ -28,6 +28,6 @@ public class StoreService {
                 return productBean;
             }
         }
-        return null;
+        throw new RuntimeException();
     }
 }
