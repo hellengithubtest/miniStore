@@ -11,19 +11,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
 public class StoreController {
-    private StoreService listOfProducts;
+    private StoreService service;
 
-    public StoreController(StoreService listOfProducts) {
-        this.listOfProducts = listOfProducts;
+    public StoreController(StoreService service) {
+        this.service = service;
     }
     @GetMapping(value = {"/"})
     public ModelAndView listOfProducts(ModelMap modelMap) {
-        List<ProductBean> list = listOfProducts.getList();
+        List<ProductBean> list = service.getAll();
         modelMap.addAttribute("list", list);
         return new ModelAndView("listOfProducts", modelMap);
     }
@@ -31,7 +30,7 @@ public class StoreController {
     @RequestMapping(value = "/product/{id}", method = RequestMethod.GET)
     public String productInformation(@PathVariable(value = "id") int id, Model model) {
         try {
-            model.addAttribute("product", listOfProducts.findId(id));
+            model.addAttribute("product", service.getCurrentId(id));
             return "productInformation";
         } catch (RuntimeException e) {
             return "redirect:/";
