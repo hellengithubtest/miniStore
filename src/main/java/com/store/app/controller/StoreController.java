@@ -1,6 +1,7 @@
 package com.store.app.controller;
 
 import com.store.app.bean.ProductBean;
+import com.store.app.repository.StoreRepository;
 import com.store.app.service.StoreService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,9 +17,11 @@ import java.util.List;
 @Controller
 public class StoreController {
     private StoreService service;
+    private StoreRepository repository;
 
-    public StoreController(StoreService service) {
+    public StoreController(StoreService service, StoreRepository repository) {
         this.service = service;
+        this.repository = repository;
     }
     @GetMapping(value = {"/"})
     public ModelAndView listOfProducts(ModelMap modelMap) {
