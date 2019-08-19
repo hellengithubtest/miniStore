@@ -9,32 +9,25 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
 <body>
-
-<nav class="navbar navbar-expand-lg navbar-default bg-light">
-  <a class="navbar-brand" href="/">Mini Market</a>
-
-  <div>
-    <ul class="navbar-nav">
-      <li class="active">
-        <a class="nav-link" href="/">Products</a>
-      </li>
-      <li>
-        <a class="nav-link" href="/">About</a>
-      </li>
-    </ul>
-  </div>
-</nav>
+<header>
+    <jsp:include page="header.jsp"/>
+</header>
+<div class="main">
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm">
-                    <c:forEach items="${list}" var="item">
-                        <tr>
-                            <a href="/product/${item.productId}" class="list-group-item">${item.productName}</a>
-                        </tr>
-                    </c:forEach>
+                <c:forEach items="${list}" var="item">
+                    <tr>
+                       <a href="/product/${item.productId}" class="list-group-item">${item.productName}</a>
+                     </tr>
+                 </c:forEach>
              </div>
-         </div>
+        </div>
     </div>
+</div>
+<footer class="page-footer font-small">
+    <jsp:include page="footer.jsp"/>
+</footer>
 <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

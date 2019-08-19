@@ -8,13 +8,17 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
   <body>
+  <header>
+      <jsp:include page="header.jsp"/>
+  </header>
   <div class="container-fluid">
           <div class="row">
               <div class="col-sm">
-                    <h4 class="text-primary">Description of product</h4>
+                    <h5 class="text-primary">Description of product: </h5>
               </div>
           </div>
-	<table class="table" style="background-color: #F0F8FF">
+
+	<table class="table table-bordered">
 		<thead>
 			<tr>
 				<th class="text-primary">Product Id</th>
@@ -27,7 +31,11 @@
 				<th class="text-muted">${product.productName}</th>
 				<th class="text-muted">${product.productCost}</th>
 		</tbody>
-    </div>
+    </table>
+  </div>
+<footer class="page-footer font-small>
+    <jsp:include page="footer.jsp"/>
+</footer>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

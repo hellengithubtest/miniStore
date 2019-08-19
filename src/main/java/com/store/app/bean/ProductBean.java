@@ -1,10 +1,8 @@
 package com.store.app.bean;
 
-import lombok.Setter;
-import lombok.Getter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class ProductBean {
     private int productId;
     private String productName;
