@@ -25,7 +25,8 @@ public class ProductDaoImpl implements ProductDao{
 
     @Override
     public ProductBean findById(int id) {
-        String sql = "SELECT id, name, cost FROM products WHERE id=" + id + ";";
-        return jdbcTemplate.queryForObject(sql, new ProductMapper());
+        String sql = "SELECT id, name, cost FROM products WHERE id = ?";
+        return jdbcTemplate.queryForObject(sql, new Object[]{id},
+                new ProductMapper());
     }
 }
