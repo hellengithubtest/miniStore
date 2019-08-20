@@ -1,1 +1,1 @@
-insert into products values (1, 'apple', 10), (2, 'orange', 20);
+insert into products values (1, 'apple', 10), (2, 'orange', 20), (3, 'banana', 15), (4, 'strawberry', 35);

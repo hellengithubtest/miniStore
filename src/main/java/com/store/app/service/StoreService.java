@@ -1,27 +1,24 @@
 package com.store.app.service;
 
 import com.store.app.bean.ProductBean;
-import com.store.app.repository.StoreRepository;
+import com.store.app.dao.ProductDaoImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class StoreService {
+public class StoreService implements ProductService{
     @Autowired
-    private StoreRepository repo;
+    private ProductDaoImpl productDao;
 
-    public ProductBean getCurrentId(int id) {
-        for (ProductBean productBean : repo.getList()) {
-            if(productBean.getProductId() == id) {
-                return productBean;
-            }
-        }
-        throw new RuntimeException();
+    @Override
+    public List<ProductBean> findAll() {
+        return productDao.findAll();
     }
 
-    public List<ProductBean> getAll() {
-        return repo.getList();
+    @Override
+    public ProductBean findById(int id) {
+        return productDao.findById(id);
     }
 }

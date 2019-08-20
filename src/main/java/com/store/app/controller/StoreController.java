@@ -1,8 +1,8 @@
 package com.store.app.controller;
 
 import com.store.app.bean.ProductBean;
-import com.store.app.repository.StoreRepository;
 import com.store.app.service.StoreService;
+import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -17,15 +17,13 @@ import java.util.List;
 @Controller
 public class StoreController {
     private StoreService service;
-    private StoreRepository repository;
 
-    public StoreController(StoreService service, StoreRepository repository) {
+    public StoreController(StoreService service) {
         this.service = service;
-        this.repository = repository;
     }
     @GetMapping(value = {"/"})
     public ModelAndView listOfProducts(ModelMap modelMap) {
-        List<ProductBean> list = service.getAll();
+        List<ProductBean> list = service.findAll();
         modelMap.addAttribute("list", list);
         return new ModelAndView("listOfProducts", modelMap);
     }
@@ -33,7 +31,7 @@ public class StoreController {
     @RequestMapping(value = "/product/{id}", method = RequestMethod.GET)
     public String productInformation(@PathVariable(value = "id") int id, Model model) {
         try {
-            model.addAttribute("product", service.getCurrentId(id));
+            model.addAttribute("product", service.findById(id));
             return "productInformation";
         } catch (RuntimeException e) {
             return "redirect:/";

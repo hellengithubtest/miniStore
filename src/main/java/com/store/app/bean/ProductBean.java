@@ -8,9 +8,13 @@ public class ProductBean {
     private String productName;
     private int productCost;
 
+    public ProductBean() {
+
+    }
     public ProductBean(int productId, String productName, int productCost) {
         this.productId = productId;
         this.productName = productName;
         this.productCost = productCost;
     }
+
 }
