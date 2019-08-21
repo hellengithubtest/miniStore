@@ -21,4 +21,19 @@ public class StoreService implements ProductService{
     public ProductBean findById(int id) {
         return productDao.findById(id);
     }
+
+    @Override
+    public void save(ProductBean productBean) {
+        productDao.save(productBean);
+    }
+
+    @Override
+    public int delete(int id) {
+        return productDao.delete(id);
+    }
+
+    @Override
+    public void update(ProductBean productBean) {
+        productDao.update(productBean);
+    }
 }

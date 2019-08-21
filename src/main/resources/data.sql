@@ -1,1 +1,1 @@
-insert into products values (1, 'apple', 10), (2, 'orange', 20), (3, 'banana', 15), (4, 'strawberry', 35);
+insert into products values (DEFAULT, 'apple', 10), (DEFAULT, 'orange', 20), (DEFAULT, 'banana', 15), (DEFAULT, 'strawberry', 35);

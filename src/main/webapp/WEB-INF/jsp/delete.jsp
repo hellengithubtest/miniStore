@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
   <head>
+  <title>Delete</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -12,23 +13,9 @@
 <header>
     <jsp:include page="header.jsp"/>
 </header>
-<div class="main">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm">
-                <c:forEach items="${list}" var="item">
-                    <tr>
-                       <a href="/product/${item.productId}" class="list-group-item">${item.productName}</a>
-                     </tr>
-
-                 </c:forEach>
-                     <tr>
-                       <td><a href="./product/new"><h2>+</h2></a></td>
-                     </tr>
-             </div>
-        </div>
-    </div>
-</div>
+    <p>Delete some product</p>
+	    <p><strong><a href="/">Click for Read</a></strong></p>
+	${msg}
 <footer class="page-footer font-small">
     <jsp:include page="footer.jsp"/>
 </footer>

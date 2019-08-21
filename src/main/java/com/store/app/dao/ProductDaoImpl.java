@@ -29,4 +29,29 @@ public class ProductDaoImpl implements ProductDao{
         return jdbcTemplate.queryForObject(sql, new Object[]{id},
                 new ProductMapper());
     }
+
+    public void save(ProductBean productBean) {
+        String sqlQuery = "INSERT into products(name, cost) " +
+                "VALUES (?, ?)";
+        jdbcTemplate.update(sqlQuery,
+                productBean.getProductName(),
+                productBean.getProductCost());
+    }
+
+    public void update(ProductBean productBean) {
+        String sqlQuery = "update products set " +
+                "name = ?, cost = ? " +
+                "where id = ?";
+        jdbcTemplate.update(sqlQuery
+                , productBean.getProductName()
+                , productBean.getProductCost()
+                , productBean.getProductId());
+    }
+    public int delete(int id) {
+        String sqlQuery = "delete from products " +
+                "where id = ?";
+        Object[] args = new Object[] {id};
+        return jdbcTemplate.update(sqlQuery, args);
+    }
+
 }

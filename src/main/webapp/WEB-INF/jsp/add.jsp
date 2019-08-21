@@ -12,23 +12,18 @@
 <header>
     <jsp:include page="header.jsp"/>
 </header>
-<div class="main">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm">
-                <c:forEach items="${list}" var="item">
-                    <tr>
-                       <a href="/product/${item.productId}" class="list-group-item">${item.productName}</a>
-                     </tr>
+<form method="post" action="${pageContext.request.contextPath}/product/new">
 
-                 </c:forEach>
-                     <tr>
-                       <td><a href="./product/new"><h2>+</h2></a></td>
-                     </tr>
-             </div>
-        </div>
+    <div class="form-group col-md-2">
+      <label for="inputName">Name</label>
+      <input name="name" type="text" class="form-control" id="inputName">
     </div>
-</div>
+    <div class="form-group col-md-2">
+      <label for="inputCost">Cost</label>
+      <input name="cost" type="text" class="form-control" id="inputCost">
+    </div>
+<button type="submit" class="btn btn-primary">Add</button>
+</form>
 <footer class="page-footer font-small">
     <jsp:include page="footer.jsp"/>
 </footer>
