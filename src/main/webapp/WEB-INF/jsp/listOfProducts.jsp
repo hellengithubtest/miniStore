@@ -13,21 +13,20 @@
     <jsp:include page="header.jsp"/>
 </header>
 <div class="main">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm">
+<div class="container-fluid">
+<table>
                 <c:forEach items="${list}" var="item">
                     <tr>
-                       <a href="/product/${item.productId}" class="list-group-item">${item.productName}</a>
+                       <td><a href="/product/${item.productId}" class="btn btn-primary btn-lg btn-block" > ${item.productName} </a></td>
+                       <td><a href="/update/${item.productId}" class="btn btn-outline-primary"> Edit </a</td>
+                       <td><a href="/delete/${item.productId}" class="btn btn-outline-primary"> Delete </a></td>
                      </tr>
-
                  </c:forEach>
                      <tr>
-                       <td><a href="./product/new"><h2>+</h2></a></td>
+                       <td><a href="./product/new" class="btn btn-outline-primary"> new product </a></td>
                      </tr>
-             </div>
-        </div>
-    </div>
+</table>
+</div>
 </div>
 <footer class="page-footer font-small">
     <jsp:include page="footer.jsp"/>

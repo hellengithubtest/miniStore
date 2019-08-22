@@ -12,11 +12,7 @@
   <header>
       <jsp:include page="header.jsp"/>
   </header>
-<!-- Editable table -->
-<div class="card">
-  <div class="card-body">
-    <div id="table" class="table-editable">
-      <span class="table-add float-right mb-3 mr-2"><a href="#!" class="text-success"><i class="fas fa-plus fa-2x" aria-hidden="true"></i></a></span>
+
       <table class="table table-bordered table-responsive-md table-striped text-center">
         <thead>
           <tr>
@@ -27,23 +23,13 @@
         </thead>
         <tbody>
           <tr>
-            <td class="pt-3-half" contenteditable="true">${product.productId}</td>
-            <td class="pt-3-half" contenteditable="true">${product.productName}</td>
-            <td class="pt-3-half" contenteditable="true">${product.productCost}</td>
-              <span class="table-up"><a href="#!" class="indigo-text"><i class="fas fa-long-arrow-alt-up" aria-hidden="true"></i></a></span>
-              <span class="table-down"><a href="" class="indigo-text"><i class="fas fa-long-arrow-alt-down" aria-hidden="true"></i></a></span>
-            </td>
-            <td>
-              <span class="table-remove"><a href="/product/delete/<c:out value='${product.productId}'/>"<button type="button" class="btn btn-danger btn-rounded btn-sm my-0">Remove</button></a></span>
-              <span class="table-remove"><a href="/product/edit/<c:out value='${product.productId}'/>"<button type="button" class="btn btn-danger btn-rounded btn-sm my-0">Update</button></a></span>
-            </td>
+            <td class="pt-3-half" >${product.productId}</td>
+            <td class="pt-3-half" >${product.productName}</td>
+            <td class="pt-3-half" >${product.productCost}</td>
           </tr>
         </tbody>
       </table>
-    </div>
-  </div>
-</div>
-<!-- Editable table -->
+
 <footer class="page-footer font-small>
     <jsp:include page="footer.jsp"/>
 </footer>

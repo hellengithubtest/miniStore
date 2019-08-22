@@ -2,7 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
   <head>
-  <title>Delete</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -13,10 +12,23 @@
 <header>
     <jsp:include page="header.jsp"/>
 </header>
-    <p>Edit some product</p>
+<form method="post" action="/updateProduct">
 
-	    <p><strong><a href="/">Click for Read</a></strong></p>
-	${msg}
+    <div class="form-group col-md-2">
+     <label for="inputName">Name</label>
+        <input name="id" type="text" class="form-control" id="inputName" value="${product.productId}" readonly>
+     </div>
+
+    <div class="form-group col-md-2">
+      <label for="inputName">Name</label>
+      <input name="name" type="text" class="form-control" id="inputName" value="${product.productName}">
+    </div>
+    <div class="form-group col-md-2">
+      <label for="inputCost">Cost</label>
+      <input name="cost" type="text" class="form-control" id="inputCost" value="${product.productCost}">
+    </div>
+<button type="submit" class="btn btn-primary">Add</button>
+</form>
 <footer class="page-footer font-small">
     <jsp:include page="footer.jsp"/>
 </footer>

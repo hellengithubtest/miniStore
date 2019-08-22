@@ -29,45 +29,44 @@ public class StoreController {
     public String productInformation(@PathVariable(value = "id") int id, Model model) {
         try {
             model.addAttribute("product", service.findById(id));
-            model.addAttribute("id", id);
+            //model.addAttribute("id", id);
             return "productInformation";
         } catch (RuntimeException e) {
             return "redirect:/";
         }
     }
 
-    @RequestMapping(value = "product/delete/{id}", method = RequestMethod.GET)
-    public String deleteProduct(@PathVariable int id){
-        System.out.println("delete id " + id);
+    @GetMapping("/delete/{id}")
+    public String deleteProduct(@PathVariable("id") int id){
         service.delete(id);
-        return "delete";
+        return "redirect:/";
     }
 
-    @GetMapping("product/edit/{id}")
-    public String edit(){
+    @GetMapping("/update/{id}")
+    public String update(@PathVariable("id") int id, ModelMap model){
+        model.addAttribute("product", service.findById(id));
         return "edit";
     }
 
-    @RequestMapping(value = "/product/edit/{id}", method = RequestMethod.POST)
-    public String updateProduct(@PathVariable int id, @RequestBody ProductBean productBean){
-        System.out.println("edit id " + id);
+    @PostMapping("/updateProduct")
+    public String updateProduct(@RequestParam("id") int id, @RequestParam("name") String name, @RequestParam("cost") int cost){
+        ProductBean productBean = new ProductBean(id, name, cost);
         service.update(productBean);
-        return "edit";
-    }
-
-    @PostMapping("product/new")
-    public String newProduct(@RequestParam("name") String name, @RequestParam("cost") int cost) {
-        ProductBean newproductBean = new ProductBean();
-        System.out.println("post mapping name " + name + " cost " + cost);
-        newproductBean.setProductName(name);
-        newproductBean.setProductCost(cost);
-        service.save(newproductBean);
         return "redirect:/";
     }
 
     @GetMapping("product/new")
     public String add(){
         return "add";
+    }
+
+    @PostMapping("product/new")
+    public String newProduct(@RequestParam("name") String name, @RequestParam("cost") int cost) {
+        ProductBean newproductBean = new ProductBean();
+        newproductBean.setProductName(name);
+        newproductBean.setProductCost(cost);
+        service.save(newproductBean);
+        return "redirect:/";
     }
 
 }
