@@ -1,6 +1,7 @@
 package com.store.app.controller;
 
 import com.store.app.entity.Product;
+import com.store.app.service.SearchService;
 import com.store.app.service.StoreService;
 import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.stereotype.Controller;
@@ -14,14 +15,24 @@ import java.util.List;
 @Controller
 public class StoreController {
     private StoreService service;
+    private SearchService searchService;
 
-    public StoreController(StoreService service) {
+    public StoreController(StoreService service, SearchService searchService) {
         this.service = service;
+        this.searchService = searchService;
     }
+
     @GetMapping(value = {"/"})
-    public ModelAndView listOfProducts(ModelMap modelMap) {
-        List<Product> list = service.findAll();
-        modelMap.addAttribute("list", list);
+    public ModelAndView listOfProducts(@RequestParam(value = "search", required = false) String q, ModelMap modelMap) {
+        List<Product> list = null;
+        System.out.println("Search parameter" + q);
+        if(q != null){
+            list = searchService.fuzzySearch(q);
+            modelMap.addAttribute("list", list);
+        }else {
+            list = service.findAll();
+            modelMap.addAttribute("list", list);
+        }
         return new ModelAndView("listOfProducts", modelMap);
     }
 

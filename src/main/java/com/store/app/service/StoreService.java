@@ -33,4 +33,11 @@ public class StoreService {
     public void update(Product product) {
         productRepository.save(product);
     }
+/*
+
+    public List<Product> search(String q) {
+        productRepository.
+    }
+*/
+
 }
