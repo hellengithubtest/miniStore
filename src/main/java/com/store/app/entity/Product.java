@@ -6,14 +6,28 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.Id;
 
-import org.hibernate.search.annotations.Field;
-import org.hibernate.search.annotations.Indexed;
-import org.hibernate.search.annotations.TermVector;
-import org.springframework.context.event.EventListener;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.apache.lucene.analysis.core.LowerCaseFilterFactory;
+import org.apache.lucene.analysis.core.StopFilterFactory;
+import org.apache.lucene.analysis.ngram.NGramFilterFactory;
+import org.apache.lucene.analysis.standard.StandardFilterFactory;
+import org.apache.lucene.analysis.standard.StandardTokenizerFactory;
+import org.hibernate.search.annotations.*;
+import org.hibernate.search.annotations.Parameter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+@AnalyzerDef(name = "ngram",
+        tokenizer = @TokenizerDef(factory = StandardTokenizerFactory.class ),
+        filters = {
+                @TokenFilterDef(factory = StandardFilterFactory.class),
+                @TokenFilterDef(factory = LowerCaseFilterFactory.class),
+                @TokenFilterDef(factory = StopFilterFactory.class),
+                @TokenFilterDef(factory = NGramFilterFactory.class,
+                        params = {
+                                @Parameter(name = "minGramSize", value = "1"),
+                                @Parameter(name = "maxGramSize", value = "5") } )
+        }
+)
 
 @Entity
 @Table(name = "products")
@@ -21,14 +35,17 @@ import java.io.Serializable;
 @Indexed
 @NoArgsConstructor
 @AllArgsConstructor
+@Analyzer(impl = org.apache.lucene.analysis.standard.StandardAnalyzer.class)
 public class Product implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", updatable = false, nullable = false)
     private long id;
-    @Field(termVector = TermVector.YES)
+
     @Column
+    @Field(analyzer=@Analyzer(definition="ngram"))
     private String name;
+
     @Column
     private int cost;
 

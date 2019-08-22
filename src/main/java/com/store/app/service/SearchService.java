@@ -1,6 +1,7 @@
 package com.store.app.service;
 
 import com.store.app.entity.Product;
+import org.apache.lucene.analysis.Analyzer;
 import org.hibernate.search.jpa.Search;
 import org.springframework.stereotype.Service;
 import org.hibernate.search.jpa.FullTextEntityManager;
@@ -26,7 +27,7 @@ public class SearchService {
 
     public void initializeSearch() {
         try {
-            FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(entityManager);
+            FullTextEntityManager fullTextEntityManager = org.hibernate.search.jpa.Search.getFullTextEntityManager(entityManager);
             fullTextEntityManager.createIndexer().startAndWait();
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -36,8 +37,12 @@ public class SearchService {
     @Transactional
     public List<Product> fuzzySearch(String searchTerm) {
 
-        FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(entityManager);
+        FullTextEntityManager fullTextEntityManager = org.hibernate.search.jpa.Search.getFullTextEntityManager(entityManager);
         QueryBuilder qb = fullTextEntityManager.getSearchFactory().buildQueryBuilder().forEntity(Product.class).get();
+
+        Analyzer customAnalyzer = fullTextEntityManager.getSearchFactory()
+                .getAnalyzer(Product.class);
+
         Query luceneQuery = qb.keyword().fuzzy().withEditDistanceUpTo(1).withPrefixLength(1).onFields("name")
                 .matching(searchTerm).createQuery();
 
