@@ -11,9 +11,4 @@ public class ProductBean {
     private int productId;
     private String productName;
     private int productCost;
-
-/*    public ProductBean (String productName, int productCost) {
-        this.productName = productName;
-        this.productCost = productCost;
-    }*/
 }
