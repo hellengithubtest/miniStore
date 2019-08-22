@@ -16,16 +16,16 @@
 
     <div class="form-group col-md-2">
      <label for="inputName">Id</label>
-        <input name="id" type="text" class="form-control" id="inputName" value="${product.productId}" readonly>
+        <input name="id" type="text" class="form-control" id="inputName" value="${product.id}" readonly>
      </div>
 
     <div class="form-group col-md-2">
       <label for="inputName">Name</label>
-      <input name="name" type="text" class="form-control" id="inputName" value="${product.productName}">
+      <input name="name" type="text" class="form-control" id="inputName" value="${product.name}">
     </div>
     <div class="form-group col-md-2">
       <label for="inputCost">Cost</label>
-      <input name="cost" type="text" class="form-control" id="inputCost" value="${product.productCost}">
+      <input name="cost" type="text" class="form-control" id="inputCost" value="${product.cost}">
     </div>
 <button type="submit" class="btn btn-primary">Add</button>
 </form>

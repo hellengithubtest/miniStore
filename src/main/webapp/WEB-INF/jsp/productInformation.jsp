@@ -23,9 +23,9 @@
         </thead>
         <tbody>
           <tr>
-            <td class="pt-3-half" >${product.productId}</td>
-            <td class="pt-3-half" >${product.productName}</td>
-            <td class="pt-3-half" >${product.productCost}</td>
+            <td class="pt-3-half" >${product.id}</td>
+            <td class="pt-3-half" >${product.name}</td>
+            <td class="pt-3-half" >${product.cost}</td>
           </tr>
         </tbody>
       </table>

@@ -1,6 +1,6 @@
 package com.store.app.controller;
 
-import com.store.app.bean.ProductBean;
+import com.store.app.entity.Product;
 import com.store.app.service.StoreService;
 import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.stereotype.Controller;
@@ -20,7 +20,7 @@ public class StoreController {
     }
     @GetMapping(value = {"/"})
     public ModelAndView listOfProducts(ModelMap modelMap) {
-        List<ProductBean> list = service.findAll();
+        List<Product> list = service.findAll();
         modelMap.addAttribute("list", list);
         return new ModelAndView("listOfProducts", modelMap);
     }
@@ -29,7 +29,6 @@ public class StoreController {
     public String productInformation(@PathVariable(value = "id") int id, Model model) {
         try {
             model.addAttribute("product", service.findById(id));
-            //model.addAttribute("id", id);
             return "productInformation";
         } catch (RuntimeException e) {
             return "redirect:/";
@@ -50,8 +49,8 @@ public class StoreController {
 
     @PostMapping("/updateProduct")
     public String updateProduct(@RequestParam("id") int id, @RequestParam("name") String name, @RequestParam("cost") int cost){
-        ProductBean productBean = new ProductBean(id, name, cost);
-        service.update(productBean);
+        Product product = new Product(id, name, cost);
+        service.update(product);
         return "redirect:/";
     }
 
@@ -62,9 +61,9 @@ public class StoreController {
 
     @PostMapping("product/new")
     public String newProduct(@RequestParam("name") String name, @RequestParam("cost") int cost) {
-        ProductBean newproductBean = new ProductBean();
-        newproductBean.setProductName(name);
-        newproductBean.setProductCost(cost);
+        Product newproductBean = new Product();
+        newproductBean.setName(name);
+        newproductBean.setCost(cost);
         service.save(newproductBean);
         return "redirect:/";
     }

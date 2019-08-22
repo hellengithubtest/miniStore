@@ -1,39 +1,36 @@
 package com.store.app.service;
 
-import com.store.app.bean.ProductBean;
-import com.store.app.dao.ProductDaoImpl;
+import com.store.app.entity.Product;
+import com.store.app.repository.ProductRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class StoreService implements ProductService{
+@RequiredArgsConstructor
+public class StoreService {
     @Autowired
-    private ProductDaoImpl productDao;
+    private ProductRepository productRepository;
 
-    @Override
-    public List<ProductBean> findAll() {
-        return productDao.findAll();
+    public List<Product> findAll() {
+        return productRepository.findAll();
     }
 
-    @Override
-    public ProductBean findById(int id) {
-        return productDao.findById(id);
+    public Product findById(long id) {
+        return productRepository.findOne(id);
     }
 
-    @Override
-    public void save(ProductBean productBean) {
-        productDao.save(productBean);
+    public void save(Product product) {
+        productRepository.save(product);
     }
 
-    @Override
-    public int delete(int id) {
-        return productDao.delete(id);
+    public void delete(long id) {
+        productRepository.delete(id);
     }
 
-    @Override
-    public void update(ProductBean productBean) {
-        productDao.update(productBean);
+    public void update(Product product) {
+        productRepository.save(product);
     }
 }

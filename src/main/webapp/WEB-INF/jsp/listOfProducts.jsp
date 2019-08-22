@@ -13,20 +13,20 @@
     <jsp:include page="header.jsp"/>
 </header>
 <div class="main">
-<div class="container-fluid">
+
 <table>
-                <c:forEach items="${list}" var="item">
-                    <tr>
-                       <td><a href="/product/${item.productId}" class="btn btn-primary btn-lg btn-block" > ${item.productName} </a></td>
-                       <td><a href="/update/${item.productId}" class="btn btn-outline-primary"> Edit </a</td>
-                       <td><a href="/delete/${item.productId}" class="btn btn-outline-primary"> Delete </a></td>
-                     </tr>
-                 </c:forEach>
-                     <tr>
-                       <td><a href="./product/new" class="btn btn-outline-primary"> new product </a></td>
-                     </tr>
+<c:forEach items="${list}" var="item">
+    <tr>
+        <td><a href="/product/${item.id}" class="btn btn-primary btn-lg btn-block" > ${item.name} </a></td>
+        <td><a href="/update/${item.id}" class="btn btn-outline-primary"> Edit </a></td>
+        <td><a href="/delete/${item.id}" class="btn btn-outline-primary"> Delete </a></td>
+    </tr>
+</c:forEach>
+    <tr>
+        <td><a href="./product/new" class="btn btn-outline-primary"> new product </a></td>
+    </tr>
 </table>
-</div>
+
 </div>
 <footer class="page-footer font-small">
     <jsp:include page="footer.jsp"/>
