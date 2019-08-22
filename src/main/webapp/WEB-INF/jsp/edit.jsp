@@ -15,7 +15,7 @@
 <form method="post" action="/updateProduct">
 
     <div class="form-group col-md-2">
-     <label for="inputName">Name</label>
+     <label for="inputName">Id</label>
         <input name="id" type="text" class="form-control" id="inputName" value="${product.productId}" readonly>
      </div>
 
