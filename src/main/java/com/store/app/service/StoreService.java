@@ -38,13 +38,7 @@ public class StoreService {
 
     public List<Product> search(String name) {
         return  productRepository.findByNameContaining(name);
-        /*return Lists.newArrayList(productRepository.findAll(QProduct.))*/
     }
 
-/*
-    public List<Product> findUsersWithPartOfName(String q) {
-        return  productRepository.findAll(new Predicate<Product>);
-    }
-*/
 
 }

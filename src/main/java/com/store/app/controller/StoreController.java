@@ -19,13 +19,10 @@ public class StoreController {
     }
 
     @GetMapping(value = {"/"})
-    public ModelAndView listOfProducts(@RequestParam(value = "search", required = false) String q, ModelMap modelMap) {
+    public ModelAndView listOfProducts(@RequestParam(value = "search", required = false) String search, ModelMap modelMap) {
         List<Product> list = null;
-        System.out.println("Search parameter" + q);
-        if(q != null){
-            //list = searchService.fuzzySearch(q);
-            list = service.search(q);
-            System.out.println("list is " + list);
+        if(search != null){
+            list = service.search(search);
             modelMap.addAttribute("list", list);
         }else {
             list = service.findAll();
