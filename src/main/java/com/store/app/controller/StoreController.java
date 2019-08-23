@@ -1,9 +1,7 @@
 package com.store.app.controller;
 
 import com.store.app.entity.Product;
-import com.store.app.service.SearchService;
 import com.store.app.service.StoreService;
-import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -15,11 +13,9 @@ import java.util.List;
 @Controller
 public class StoreController {
     private StoreService service;
-    private SearchService searchService;
 
-    public StoreController(StoreService service, SearchService searchService) {
+    public StoreController(StoreService service) {
         this.service = service;
-        this.searchService = searchService;
     }
 
     @GetMapping(value = {"/"})
