@@ -54,7 +54,6 @@ public class SearchService {
         try {
             productList = jpaQuery.getResultList();
         } catch (NoResultException nre) {
-            ;// do nothing
 
         }
 

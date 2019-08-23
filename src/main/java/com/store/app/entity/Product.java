@@ -21,11 +21,10 @@ import java.io.Serializable;
         filters = {
                 @TokenFilterDef(factory = StandardFilterFactory.class),
                 @TokenFilterDef(factory = LowerCaseFilterFactory.class),
-                @TokenFilterDef(factory = StopFilterFactory.class),
                 @TokenFilterDef(factory = NGramFilterFactory.class,
                         params = {
                                 @Parameter(name = "minGramSize", value = "1"),
-                                @Parameter(name = "maxGramSize", value = "5") } )
+                                @Parameter(name = "maxGramSize", value = "4") } )
         }
 )
 

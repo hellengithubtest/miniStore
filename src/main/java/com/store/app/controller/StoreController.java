@@ -27,7 +27,9 @@ public class StoreController {
         List<Product> list = null;
         System.out.println("Search parameter" + q);
         if(q != null){
-            list = searchService.fuzzySearch(q);
+            //list = searchService.fuzzySearch(q);
+            list = service.search(q);
+            System.out.println("list is " + list);
             modelMap.addAttribute("list", list);
         }else {
             list = service.findAll();
