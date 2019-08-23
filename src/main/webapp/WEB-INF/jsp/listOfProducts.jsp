@@ -12,14 +12,36 @@
 <header>
     <jsp:include page="header.jsp"/>
 </header>
-<div class="main">
+
+<div class="row">
+    <div class="col-12 col-md-3" >
+  <nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" href="/${page}">Previous</a></li>
+    <li class="page-item"><a class="page-link" href="/1">1</a></li>
+    <li class="page-item"><a class="page-link" href="/2">2</a></li>
+    <li class="page-item"><a class="page-link" href="/3">3</a></li>
+    <li class="page-item"><a class="page-link" href="/4">4</a></li>
+    <li class="page-item"><a class="page-link" href="/5">5</a></li>
+    <li class="page-item"><a class="page-link" href="/6">6</a></li>
+    <li class="page-item"><a class="page-link" href="/">Next</a></li>
+  </ul>
+</nav>
+</div>
+
+<div class="col-4 col-md-3" >
 
 <!-- Search form -->
 <form class="form-inline md-form mr-auto mb-4">
   <input name="search" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
   <button class="btn aqua-gradient btn-rounded btn-sm my-0" type="submit">Search</button>
 </form>
+</div>
+</div>
 
+<div class="main">
+
+<div class="col-md-3">
 <table>
 <c:forEach items="${list}" var="item">
     <tr>
@@ -32,6 +54,7 @@
         <td><a href="./product/new" class="btn btn-outline-primary"> new product </a></td>
     </tr>
 </table>
+</div>
 
 </div>
 <footer class="page-footer font-small">

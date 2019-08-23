@@ -2,6 +2,9 @@ package com.store.app.controller;
 
 import com.store.app.entity.Product;
 import com.store.app.service.StoreService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -9,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class StoreController {
@@ -18,16 +22,23 @@ public class StoreController {
         this.service = service;
     }
 
-    @GetMapping(value = {"/"})
-    public ModelAndView listOfProducts(@RequestParam(value = "search", required = false) String search, ModelMap modelMap) {
-        List<Product> list = null;
+    @GetMapping(value = {"/{page}"})
+    public ModelAndView listOfProducts(@RequestParam(value = "search", required = false) String search,
+                                       @PathVariable(value = "page", required = false) int page,
+                                       @RequestParam(value = "pageSize", required = false, defaultValue = "15")
+                                                   int pageSize, ModelMap modelMap) {
+        Page<Product> pages = service.findAll(page,pageSize);
+        //System.out.println("Pages" + pages.getContent());
+        /*
         if(search != null){
             list = service.search(search);
             modelMap.addAttribute("list", list);
         }else {
             list = service.findAll();
             modelMap.addAttribute("list", list);
-        }
+        }*/
+        List<Product> list = pages.getContent();
+        modelMap.addAttribute("list", list);
         return new ModelAndView("listOfProducts", modelMap);
     }
 
