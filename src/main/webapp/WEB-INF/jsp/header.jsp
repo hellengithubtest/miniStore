@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-default bg-light">
-  <a class="navbar-brand" href="/1">Mini Market</a>
+  <a class="navbar-brand" href="/products">Mini Market</a>
   <div>
     <ul class="navbar-nav">
       <li class="active">

@@ -25,36 +25,32 @@ public class StoreController {
         this.service = service;
     }
 
-    @GetMapping(value = {"/products/{page}"})
-    public ModelAndView listOfProducts(@PathVariable(required = false, name = "page") String page,
-                                       @RequestParam(value = "filter", required = false) String filter,
-                                       @RequestParam(value = "size", defaultValue = "15") int size,
+
+    @GetMapping(value = {"/products"})
+    public ModelAndView list(@RequestParam(value = "list", required = false) List<Product> list,
+                                       ModelMap modelMap){
+
+        System.out.println("list from post" + list);
+        return new ModelAndView("listOfProducts", modelMap);
+    }
+
+    @PostMapping(value = {"/products"})
+    public ModelAndView listOfProducts(@RequestParam(value = "filter", required = false) String filter,
+                                       @PageableDefault(size = 15, page = 0) Pageable pageable,
                                        ModelMap modelMap){
         Page<Product> pages;
         if(filter != null && !filter.isEmpty()){
-            pages = service.search(filter, new PageRequest(Integer.parseInt(page), size));
-            System.out.println("the first variable filter " + filter);
-            System.out.println("the first variable pages " + pages);
+            pages = service.search(filter, pageable);
         } else {
-            pages = service.findAll(new PageRequest(Integer.parseInt(page), size));
+            pages = service.findAll(pageable);
         }
+        System.out.println("POST mapping products ");
         modelMap.addAttribute("filter", filter);
-/*        modelMap.addAttribute("page", new PageImpl<Product>(pages.getContent()));
-        System.out.println("pages" + pages);*/
         modelMap.addAttribute("list", pages.getContent());
-        System.out.println("list" + pages.getContent());
-
         modelMap.addAttribute("number", pages.getNumber());
-        System.out.println("number" + pages.getNumber());
-
         modelMap.addAttribute("totalPages", pages.getTotalPages());
-        System.out.println("totalPages" + pages.getTotalPages());
-
         modelMap.addAttribute("totalElements", pages.getTotalElements());
-        System.out.println("totalElements" + pages.getTotalElements());
-
-        modelMap.addAttribute("size", pages.getSize());
-        System.out.println("size" + pages.getSize());
+        modelMap.addAttribute("pageable", pageable);
 
         return new ModelAndView("listOfProducts", modelMap);
     }

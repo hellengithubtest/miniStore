@@ -25,7 +25,9 @@ public class StoreService {
     }*/
 
     public Page<Product> findAll(Pageable pageable) {
-        return productRepository.findAll(pageable);
+        Page<Product> pages = productRepository.findAll(pageable);
+        System.out.println("Pages");
+        return pages;
     }
 
     public Product findById(long id) {
@@ -45,11 +47,13 @@ public class StoreService {
     }
 
     public Page<Product> search(String name, Pageable pageable) {
-        List<Product> list;
-        list = productRepository.findByNameContaining(name);
-        System.out.println(list);
-        Page<Product> pages = new PageImpl<Product>(list, pageable, list.size());
-        return  pages;
+/*        List<Product> list;
+        productRepository.findByNameContainingIgnoreCase(name, pageable)*/
+/*        list = productRepository.findByNameContainingIgnoreCase(name, pageable);
+
+        System.out.println("Search list" + list + " size " + list.size());
+        Page<Product> pages = new PageImpl<Product>(list, pageable, list.size());*/
+        return  productRepository.findByNameContainingIgnoreCase(name, pageable);
     }
 
 
