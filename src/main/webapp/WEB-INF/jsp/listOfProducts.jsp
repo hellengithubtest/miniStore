@@ -14,48 +14,66 @@
 </header>
 
 <div class="row">
-    <div class="col-12 col-md-3" >
-  <nav aria-label="Page navigation example">
-  <ul class="pagination">
-    <li class="page-item"><a class="page-link" href="/${page}">Previous</a></li>
-    <li class="page-item"><a class="page-link" href="/1">1</a></li>
-    <li class="page-item"><a class="page-link" href="/2">2</a></li>
-    <li class="page-item"><a class="page-link" href="/3">3</a></li>
-    <li class="page-item"><a class="page-link" href="/4">4</a></li>
-    <li class="page-item"><a class="page-link" href="/5">5</a></li>
-    <li class="page-item"><a class="page-link" href="/6">6</a></li>
-    <li class="page-item"><a class="page-link" href="/">Next</a></li>
-  </ul>
-</nav>
-</div>
-
-<div class="col-4 col-md-3" >
-
-<!-- Search form -->
-<form class="form-inline md-form mr-auto mb-4">
-  <input name="search" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-  <button class="btn aqua-gradient btn-rounded btn-sm my-0" type="submit">Search</button>
-</form>
-</div>
+    <div class="col-4 col-md-3" >
+        <!-- Search form -->
+         <form class="form-inline md-form mr-auto mb-4">
+            <input name="filter" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            <button class="btn aqua-gradient btn-rounded btn-sm my-0" type="submit">Search</button>
+         </form>
+    </div>
 </div>
 
 <div class="main">
+    <div class="col-md-3">
 
-<div class="col-md-3">
-<table>
-<c:forEach items="${list}" var="item">
-    <tr>
-        <td><a href="/product/${item.id}" class="btn btn-primary btn-lg btn-block" > ${item.name} </a></td>
-        <td><a href="/update/${item.id}" class="btn btn-outline-primary"> Edit </a></td>
-        <td><a href="/delete/${item.id}" class="btn btn-outline-primary"> Delete </a></td>
-    </tr>
-</c:forEach>
-    <tr>
-        <td><a href="./product/new" class="btn btn-outline-primary"> new product </a></td>
-    </tr>
-</table>
-</div>
+        <table>
+            <c:forEach items="${list}" var="item">
+                <tr>
+                    <td><a href="/product/${item.id}" class="btn btn-primary btn-lg btn-block" > ${item.name} </a></td>
+                    <td><a href="/update/${item.id}" class="btn btn-outline-primary"> Edit </a></td>
+                    <td><a href="/delete/${item.id}" class="btn btn-outline-primary"> Delete </a></td>
+                </tr>
+            </c:forEach>
+                <tr>
+                    <td><a href="./product/new" class="btn btn-outline-primary"> new product </a></td>
+                </tr>
+        </table>
 
+            <c:choose>
+                <%-- Show Prev as link if not on first page --%>
+                <c:when test="${pages.getNumber}">
+                  <span>Prev</span>
+                </c:when>
+                <c:otherwise>
+                    <c:url value="/products/prev" var="url" />
+                    <a href='<c:out value="${url}" />'>Prev</a>
+                </c:otherwise>
+            </c:choose>
+
+            <c:forEach begin="0" end="${totalPages - 1}" step="1"  varStatus="tagStatus">
+                <c:choose>
+                    <%-- In PagedListHolder page count starts from 0 --%>
+                    <c:when test="${(page) == tagStatus.index}">
+                        <span>${tagStatus.index}</span>
+                    </c:when>
+                    <c:otherwise>
+                        <c:url value="/products/${tagStatus.index}?filter=${filter}" var="url" />
+                        <a href='<c:out value="${url}" />'>${tagStatus.index}</a>
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
+
+            <c:choose>
+                <%-- Show Next as link if not on last page --%>
+                <c:when test="${pages.getTotalPages}">
+                  <span>Next</span>
+                </c:when>
+                <c:otherwise>
+                    <c:url value="/products/next" var="url" />
+                    <a href='<c:out value="${url}" />'>Next</a>
+                </c:otherwise>
+            </c:choose>
+    </div>
 </div>
 <footer class="page-footer font-small">
     <jsp:include page="footer.jsp"/>

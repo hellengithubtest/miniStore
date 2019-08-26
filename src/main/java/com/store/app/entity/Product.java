@@ -22,7 +22,7 @@ public class Product implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @Column
+    @Column(name = "cost")
     private int cost;
 
 }

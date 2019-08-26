@@ -3,10 +3,10 @@
   <div>
     <ul class="navbar-nav">
       <li class="active">
-        <a class="nav-link" href="/1">Products</a>
+        <a class="nav-link" href="/products">Products</a>
       </li>
       <li>
-        <a class="nav-link" href="/1">About</a>
+        <a class="nav-link" href="/products">About</a>
       </li>
     </ul>
   </div>
