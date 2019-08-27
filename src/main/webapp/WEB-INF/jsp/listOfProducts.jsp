@@ -55,14 +55,14 @@
 </c:forEach>
 <c:choose>
     <%-- Show Next as link if not on last page --%>
-    <c:when test="${(number) == (totalPages)}">
+    <c:when test="${(number) == ((totalPages) - 1)}">
         <li class="page-item disabled">
-             <span class="page-link" value="/products?page=${(number) - 1}&filter=${filter}">Next</span>
+             <span class="page-link" value="#">Next</span>
         </li>
     </c:when>
     <c:otherwise>
-        <li class="page-item activate">
-             <span class="page-link" value="${(number) + 1}">Next</span>
+        <li class="page-item">
+             <a class="page-link" href="/products?page=${(number) + 1}&filter=${filter}">Next</a>
         </li>
     </c:otherwise>
 </c:choose>
