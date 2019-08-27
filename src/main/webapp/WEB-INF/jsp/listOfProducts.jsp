@@ -25,13 +25,13 @@
           </div>
 
           <div class="col-7 col-md-2" >
-          <form action="${pageContext.request.contextPath}/products" value = "${size}" modelAttribute="size" method="get">
+          <form action="${pageContext.request.contextPath}/products" value = "${size}" modelAttribute="size">
                     <select name="size">
                         <option value="10" ${size == '10' ? 'selected' : ''}>10</option>
                         <option value="15" ${size == '15' ? 'selected' : ''}>15</option>
                         <option value="20" ${size == '20' ? 'selected' : ''}>20</option>
+                        <input type="submit">
                     </select>
-                      <input name="size" type="submit">
           </form>
           </div>
     </div>
