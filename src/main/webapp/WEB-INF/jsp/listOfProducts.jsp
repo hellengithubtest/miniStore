@@ -14,17 +14,25 @@
 </header>
 
 <div class="main">
-    <div class="col-md-3">
 
     <div class="row">
-        <div class="col-4 col-md-3" >
+          <div class="col-7 col-md-3" >
             <!-- Search form -->
              <form class="form-inline md-form mr-auto mb-4">
                 <input name="filter" class="form-control mr-sm-2" type="text" placeholder="Search"  value = "${filter}" aria-label="Search">
                 <button class="btn aqua-gradient btn-rounded btn-sm my-0" type="submit">Search</button>
              </form>
-        </div>
+          </div>
+
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-primary btn-sm" name="size" value="${size}">10</button>
+                <button type="button" class="btn btn-primary btn-sm" name="size" value="${size}">15</button>
+                <button type="button" class="btn btn-primary btn-sm" name="size" value="${size}">20</button>
+            </div>
+
     </div>
+
+    <div class="col-md-3">
 
 <nav aria-label="...">
 <ul class="pagination">
@@ -45,11 +53,32 @@
 <c:forEach begin="1" end="${totalPages}" step="1" varStatus="tagStatus" >
         <c:choose>
          <c:when test="${(number) == (tagStatus.index) - 1}">
-            <li class="page-item active"><span class="page-link">${tagStatus.index}<span class="sr-only">(current)</span></span></li>
-         </c:when>
-         <c:otherwise>
             <li class="page-item"><a class="page-link" href='/products?page=${(tagStatus.index) - 1}&filter=${filter}'>${tagStatus.index}</a>
             </li>
+         </c:when>
+         <c:otherwise>
+            <c:set var="next" value="${(number) + 1}"/>
+            <c:set var="nextNext" value="${(number) + 2}"/>
+            <c:set var="prev" value="${(number) - 1}"/>
+            <c:set var="prevPrev" value="${(number) - 2}"/>
+            <c:choose>
+                <c:when test="${(tagStatus.index) == (next)}">
+                            <li class="page-item"><a class="page-link" href='/products?page=${(tagStatus.index) - 1}&filter=${filter}'>${tagStatus.index}</a>
+                            </li>
+                </c:when>
+                <c:when test="${(tagStatus.index) == (nextNext)}">
+                            <li class="page-item"><a class="page-link" href='/products?page=${(tagStatus.index) - 1}&filter=${filter}'>${tagStatus.index}</a>
+                            </li>
+                </c:when>
+                <c:when test="${(tagStatus.index) == (prev)}">
+                            <li class="page-item"><a class="page-link" href='/products?page=${(tagStatus.index) - 1}&filter=${filter}'>${tagStatus.index}</a>
+                            </li>
+                </c:when>
+                <c:when test="${(tagStatus.index) == (prevPrev)}">
+                            <li class="page-item"><a class="page-link" href='/products?page=${(tagStatus.index) - 1}&filter=${filter}'>${tagStatus.index}</a>
+                            </li>
+                </c:when>
+            </c:choose>
          </c:otherwise>
          </c:choose>
 </c:forEach>
