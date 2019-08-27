@@ -37,7 +37,7 @@
     </c:when>
     <c:otherwise>
         <li class="page-item">
-              <a class="page-link" href="/products?page=${pages.getNumber() - 2}&filter=${filter}">Previous</a>
+              <a class="page-link" href="/products?page=${pages.getPageNumber() - 1}&filter=${filter}">Previous</a>
         </li>
     </c:otherwise>
     </c:choose>
