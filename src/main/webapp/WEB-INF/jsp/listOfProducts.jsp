@@ -48,7 +48,7 @@
             <li class="page-item active"><span class="page-link">${tagStatus.index}<span class="sr-only">(current)</span></span></li>
          </c:when>
          <c:otherwise>
-            <li class="page-item"><a class="page-link" href='/products?page=${(tagStatus.index) - 1}&filter=${filter}'>${tagStatus.index}</a>
+            <li class="page-item"><a class="page-link" href='/products?page=${(tagStatus.index)}&filter=${filter}'>${tagStatus.index}</a>
             </li>
          </c:otherwise>
          </c:choose>
