@@ -30,21 +30,21 @@
 <ul class="pagination">
     <%-- Show Prev as link if not on first page --%>
     <c:choose>
-    <c:when test="${(pages.getNumber()) == 0}">
+    <c:when test="${(number) == 0}">
         <li class="page-item disabled">
               <a class="page-link" href="#" tabindex="-1">Previous</a>
             </li>
     </c:when>
     <c:otherwise>
         <li class="page-item">
-              <a class="page-link" href="/products?page=${pages.getPageNumber() - 1}&filter=${filter}">Previous</a>
+              <a class="page-link" href="/products?page=${(number) - 1}&filter=${filter}">Previous</a>
         </li>
     </c:otherwise>
     </c:choose>
 
 <c:forEach begin="1" end="${totalPages -1 }" step="1" varStatus="tagStatus" >
         <c:choose>
-         <c:when test="${(pages.getNumber()) == tagStatus.index}">
+         <c:when test="${(number) == tagStatus.index}">
             <li class="page-item active"><span class="page-link">${tagStatus.index}<span class="sr-only">(current)</span></span></li>
          </c:when>
          <c:otherwise>
@@ -55,14 +55,14 @@
 </c:forEach>
 <c:choose>
     <%-- Show Next as link if not on last page --%>
-    <c:when test="${(pages.getNumber()) == 2}">
+    <c:when test="${(number) == (totalPages)}">
         <li class="page-item disabled">
-             <span class="page-link" value="/products?page=${(tagStatus.index) - 1}&filter=${filter}">Next</span>
+             <span class="page-link" value="/products?page=${(number) - 1}&filter=${filter}">Next</span>
         </li>
     </c:when>
     <c:otherwise>
         <li class="page-item activate">
-             <span class="page-link" value="${(pages.getNumber()) + 1}">Next</span>
+             <span class="page-link" value="${(number) + 1}">Next</span>
         </li>
     </c:otherwise>
 </c:choose>
