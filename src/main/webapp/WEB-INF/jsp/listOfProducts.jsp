@@ -13,19 +13,61 @@
     <jsp:include page="header.jsp"/>
 </header>
 
-<div class="row">
-    <div class="col-4 col-md-3" >
-        <!-- Search form -->
-         <form class="form-inline md-form mr-auto mb-4">
-            <input name="filter" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-            <button class="btn aqua-gradient btn-rounded btn-sm my-0" type="submit">Search</button>
-         </form>
-    </div>
-</div>
-
 <div class="main">
     <div class="col-md-3">
-    <jsp:include page="pagination.jsp"/>
+
+    <div class="row">
+        <div class="col-4 col-md-3" >
+            <!-- Search form -->
+             <form class="form-inline md-form mr-auto mb-4">
+                <input name="filter" class="form-control mr-sm-2" type="text" placeholder="Search"  value = "${filter}" aria-label="Search">
+                <button class="btn aqua-gradient btn-rounded btn-sm my-0" type="submit">Search</button>
+             </form>
+        </div>
+    </div>
+
+<nav aria-label="...">
+<ul class="pagination">
+    <%-- Show Prev as link if not on first page --%>
+    <c:choose>
+    <c:when test="${(pages.getNumber()) == 0}">
+        <li class="page-item disabled">
+              <a class="page-link" href="#" tabindex="-1">Previous</a>
+            </li>
+    </c:when>
+    <c:otherwise>
+        <li class="page-item">
+              <a class="page-link" href="/products?page=${pages.getNumber() - 2}&filter=${filter}">Previous</a>
+        </li>
+    </c:otherwise>
+    </c:choose>
+
+<c:forEach begin="1" end="${totalPages -1 }" step="1" varStatus="tagStatus" >
+        <c:choose>
+         <c:when test="${(pages.getNumber()) == tagStatus.index}">
+            <li class="page-item active"><span class="page-link">${tagStatus.index}<span class="sr-only">(current)</span></span></li>
+         </c:when>
+         <c:otherwise>
+            <li class="page-item"><a class="page-link" href='/products?page=${(tagStatus.index) - 1}&filter=${filter}'>${tagStatus.index}</a>
+            </li>
+         </c:otherwise>
+         </c:choose>
+</c:forEach>
+<c:choose>
+    <%-- Show Next as link if not on last page --%>
+    <c:when test="${(pages.getNumber()) == 2}">
+        <li class="page-item disabled">
+             <span class="page-link" value="/products?page=${(tagStatus.index) - 1}&filter=${filter}">Next</span>
+        </li>
+    </c:when>
+    <c:otherwise>
+        <li class="page-item activate">
+             <span class="page-link" value="${(pages.getNumber()) + 1}">Next</span>
+        </li>
+    </c:otherwise>
+</c:choose>
+</ul>
+</nav>
 
         <table>
             <c:forEach items="${list}" var="item">
@@ -39,8 +81,6 @@
                     <td><a href="./product/new" class="btn btn-outline-primary"> new product </a></td>
                 </tr>
         </table>
-
-
     </div>
 </div>
 <footer class="page-footer font-small">

@@ -25,18 +25,10 @@ public class StoreController {
         this.service = service;
     }
 
-
     @GetMapping(value = {"/products"})
-    public ModelAndView list(@RequestParam(value = "list", required = false) List<Product> list,
-                                       ModelMap modelMap){
-
-        System.out.println("list from post" + list);
-        return new ModelAndView("listOfProducts", modelMap);
-    }
-
-    @PostMapping(value = {"/products"})
     public ModelAndView listOfProducts(@RequestParam(value = "filter", required = false) String filter,
-                                       @PageableDefault(size = 15, page = 0) Pageable pageable,
+                                       /*@RequestParam(value = "number", required = false, defaultValue = "0") int number,*/
+                                       @PageableDefault(size = 15) Pageable pageable,
                                        ModelMap modelMap){
         Page<Product> pages;
         if(filter != null && !filter.isEmpty()){
@@ -44,12 +36,12 @@ public class StoreController {
         } else {
             pages = service.findAll(pageable);
         }
-        System.out.println("POST mapping products ");
         modelMap.addAttribute("filter", filter);
         modelMap.addAttribute("list", pages.getContent());
-        modelMap.addAttribute("number", pages.getNumber());
+        modelMap.addAttribute("number", pageable.getPageNumber());
+        System.out.println("number" + pages.getNumber());
         modelMap.addAttribute("totalPages", pages.getTotalPages());
-        modelMap.addAttribute("totalElements", pages.getTotalElements());
+        System.out.println("total pages" + pages.getTotalPages());
         modelMap.addAttribute("pageable", pageable);
 
         return new ModelAndView("listOfProducts", modelMap);
