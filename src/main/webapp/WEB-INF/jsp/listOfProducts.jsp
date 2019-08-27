@@ -28,76 +28,15 @@
                         <option value="20" ${size == '20' ? 'selected' : ''}>20</option>
                         <input type="submit">
                     </select>
-          </form>
+             </form>
           </div>
     </div>
 
-    <div class="col-md-3">
+<div class="main">
+    <jsp:include page="pagination.jsp"/>
+</div>
 
-<nav aria-label="...">
-<ul class="pagination">
-    <%-- Show Prev as link if not on first page --%>
-    <c:choose>
-    <c:when test="${(number) == 0}">
-        <li class="page-item disabled">
-              <a class="page-link" href="#" tabindex="-1">Previous</a>
-            </li>
-    </c:when>
-    <c:otherwise>
-        <li class="page-item">
-              <a class="page-link" href="/products?page=${(number) - 1}&filter=${filter}&size=${size}">Previous</a>
-        </li>
-    </c:otherwise>
-    </c:choose>
-
-<c:forEach begin="1" end="${totalPages}" step="1" varStatus="tagStatus" >
-        <c:choose>
-         <c:when test="${(number) == (tagStatus.index) - 1}">
-            <li class="page-item"><a class="page-link" href='/products?page=${(tagStatus.index) - 1}&filter=${filter}&size=${size}'>${tagStatus.index}</a>
-            </li>
-         </c:when>
-         <c:otherwise>
-            <c:set var="next" value="${(number) + 1}"/>
-            <c:set var="nextNext" value="${(number) + 2}"/>
-            <c:set var="prev" value="${(number) - 1}"/>
-            <c:set var="prevPrev" value="${(number) - 2}"/>
-            <c:choose>
-                <c:when test="${(tagStatus.index) == (next)}">
-                            <li class="page-item"><a class="page-link" href='/products?page=${(tagStatus.index) - 1}&filter=${filter}&size=${size}'>${tagStatus.index}</a>
-                            </li>
-                </c:when>
-                <c:when test="${(tagStatus.index) == (nextNext)}">
-                            <li class="page-item"><a class="page-link" href='/products?page=${(tagStatus.index) - 1}&filter=${filter}&size=${size}'>${tagStatus.index}</a>
-                            </li>
-                </c:when>
-                <c:when test="${(tagStatus.index) == (prev)}">
-                            <li class="page-item"><a class="page-link" href='/products?page=${(tagStatus.index) - 1}&filter=${filter}&size=${size}'>${tagStatus.index}</a>
-                            </li>
-                </c:when>
-                <c:when test="${(tagStatus.index) == (prevPrev)}">
-                            <li class="page-item"><a class="page-link" href='/products?page=${(tagStatus.index) - 1}&filter=${filter}&size=${size}'>${tagStatus.index}</a>
-                            </li>
-                </c:when>
-            </c:choose>
-         </c:otherwise>
-         </c:choose>
-</c:forEach>
-<c:choose>
-    <%-- Show Next as link if not on last page --%>
-    <c:when test="${(number) == ((totalPages) - 1)}">
-        <li class="page-item disabled">
-             <span class="page-link" value="#">Next</span>
-        </li>
-    </c:when>
-    <c:otherwise>
-        <li class="page-item">
-             <a class="page-link" href="/products?page=${(number) + 1}&filter=${filter}&size=${size}">Next</a>
-        </li>
-    </c:otherwise>
-</c:choose>
-</ul>
-</nav>
-
+<div class="main">
         <table>
             <c:forEach items="${list}" var="item">
                 <tr>

@@ -27,7 +27,6 @@ public class StoreController {
 
     @GetMapping(value = {"/products"})
     public ModelAndView listOfProducts(@RequestParam(value = "filter", required = false) String filter,
-                                       /*@RequestParam(value = "number", required = false, defaultValue = "0") int number,*/
                                        @PageableDefault(size = 15) Pageable pageable,
                                        ModelMap modelMap){
         Page<Product> pages;
