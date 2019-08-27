@@ -33,12 +33,17 @@
             </li>
          </c:when>
          <c:otherwise>
+            <c:set var="current" value="${(number)}"/>
             <c:set var="next" value="${(number) + 1}"/>
             <c:set var="nextNext" value="${(number) + 2}"/>
+            <c:set var="nextNextnext" value="${(number) + 3}"/>
             <c:set var="prev" value="${(number) - 1}"/>
             <c:set var="prevPrev" value="${(number) - 2}"/>
-            <c:set var="current" value="${(number)}"/>
             <c:choose>
+                <c:when test="${(tagStatus.index) == (current)}">
+                           <li class="page-item"><a class="page-link" href='/products?page=${(tagStatus.index) - 1}&filter=${filter}&size=${size}'>${tagStatus.index}</a>
+                           </li>
+                </c:when>
                 <c:when test="${(tagStatus.index) == (next)}">
                             <li class="page-item"><a class="page-link" href='/products?page=${(tagStatus.index) - 1}&filter=${filter}&size=${size}'>${tagStatus.index}</a>
                             </li>
@@ -47,11 +52,12 @@
                             <li class="page-item"><a class="page-link" href='/products?page=${(tagStatus.index) - 1}&filter=${filter}&size=${size}'>${tagStatus.index}</a>
                             </li>
                 </c:when>
-                <c:when test="${(tagStatus.index) == (prev)}">
+                <c:when test="${(tagStatus.index) == (nextNextnext)}">
                             <li class="page-item"><a class="page-link" href='/products?page=${(tagStatus.index) - 1}&filter=${filter}&size=${size}'>${tagStatus.index}</a>
                             </li>
                 </c:when>
-                <c:when test="${(tagStatus.index) == (prevPrev)}">
+
+                <c:when test="${(tagStatus.index) == (prev)}">
                             <li class="page-item"><a class="page-link" href='/products?page=${(tagStatus.index) - 1}&filter=${filter}&size=${size}'>${tagStatus.index}</a>
                             </li>
                 </c:when>
