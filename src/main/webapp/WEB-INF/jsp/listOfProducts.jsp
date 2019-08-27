@@ -16,7 +16,7 @@
 <div class="main">
 
     <div class="row">
-          <div class="col-7 col-md-3" >
+          <div class="col-7 col-md-2" >
             <!-- Search form -->
              <form class="form-inline md-form mr-auto mb-4">
                 <input name="filter" class="form-control mr-sm-2" type="text" placeholder="Search"  value = "${filter}" aria-label="Search">
@@ -24,12 +24,16 @@
              </form>
           </div>
 
-            <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-primary btn-sm" name="size" value="${size}">10</button>
-                <button type="button" class="btn btn-primary btn-sm" name="size" value="${size}">15</button>
-                <button type="button" class="btn btn-primary btn-sm" name="size" value="${size}">20</button>
-            </div>
-
+          <div class="col-7 col-md-2" >
+          <form:form modelAttribute="size" method="get">
+                    <select name="category">
+                        <option value="10" ${size == '10' ? 'selected' : ''}>10</option>
+                        <option value="15" ${size == '15' ? 'selected' : ''}>15</option>
+                        <option value="20" ${size == '20' ? 'selected' : ''}>20</option>
+                    </select>
+                      <input name="size" type="submit" value="Submit">
+          </form:form>
+          </div>
     </div>
 
     <div class="col-md-3">
