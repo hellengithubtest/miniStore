@@ -42,7 +42,7 @@
     </c:otherwise>
     </c:choose>
 
-<c:forEach begin="1" end="${totalPages -1 }" step="1" varStatus="tagStatus" >
+<c:forEach begin="1" end="${totalPages}" step="1" varStatus="tagStatus" >
         <c:choose>
          <c:when test="${(number) == (tagStatus.index) - 1}">
             <li class="page-item active"><span class="page-link">${tagStatus.index}<span class="sr-only">(current)</span></span></li>
