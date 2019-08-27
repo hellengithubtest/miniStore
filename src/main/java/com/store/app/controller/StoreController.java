@@ -38,11 +38,9 @@ public class StoreController {
         }
         modelMap.addAttribute("filter", filter);
         modelMap.addAttribute("list", pages.getContent());
+        modelMap.addAttribute("size", pages.getSize());
         modelMap.addAttribute("number", pageable.getPageNumber());
-        System.out.println("number" + pages.getNumber());
         modelMap.addAttribute("totalPages", pages.getTotalPages());
-        System.out.println("total pages" + pages.getTotalPages());
-        modelMap.addAttribute("pageable", pageable);
 
         return new ModelAndView("listOfProducts", modelMap);
     }
