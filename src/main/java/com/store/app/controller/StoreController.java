@@ -2,10 +2,7 @@ package com.store.app.controller;
 
 import com.store.app.entity.Product;
 import com.store.app.service.StoreService;
-import org.springframework.beans.support.PagedListHolder;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
@@ -13,9 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.List;
-import java.util.Map;
 
 @Controller
 public class StoreController {
@@ -50,14 +44,14 @@ public class StoreController {
             model.addAttribute("product", service.findById(id));
             return "productInformation";
         } catch (RuntimeException e) {
-            return "redirect:/";
+            return "redirect:/products";
         }
     }
 
     @GetMapping("/delete/{id}")
     public String deleteProduct(@PathVariable("id") int id){
         service.delete(id);
-        return "redirect:/";
+        return "redirect:/products";
     }
 
     @GetMapping("/update/{id}")
@@ -70,7 +64,7 @@ public class StoreController {
     public String updateProduct(@RequestParam("id") int id, @RequestParam("name") String name, @RequestParam("cost") int cost){
         Product product = new Product(id, name, cost);
         service.update(product);
-        return "redirect:/";
+        return "redirect:/products";
     }
 
     @GetMapping("product/new")
@@ -84,7 +78,7 @@ public class StoreController {
         newproductBean.setName(name);
         newproductBean.setCost(cost);
         service.save(newproductBean);
-        return "redirect:/";
+        return "redirect:/products";
     }
 
 }
